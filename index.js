@@ -21,22 +21,6 @@ function set_config (background) {
     });
 }
 
-function get_available_emojis () {
-    emojis_available = client.emojis.cache.map(e=>e.toString());
-
-    var tmp = emojis_available.indexOf(config.background_emoji);
-    if(tmp >= 0){
-        emojis_available.splice(tmp,1);
-    }
-    else if(config.background_emoji === ""){
-        console.log('Background emoji is not set.');
-    }
-    else{
-        console.log('Background emoji is invalid. Removing it.');
-        set_config("");
-    }
-}
-
 function print_letter (a) {
     var x,y,set;
     var string = "";
@@ -54,7 +38,6 @@ function print_letter (a) {
 }
 
 client.once('ready', () => {
-    get_available_emojis();
 	console.log('Ready!');
 });
 
@@ -68,14 +51,19 @@ client.on('message', message => {
             message.channel.send(`${message.author} Provide a correct string (only basic ASCI characters).`);  
         }
         else{
-            if(config.background_emoji === ""){
-                message.channel.send(`${message.author} Background emoji is not set.`);
-            }
-            else{
-                for(i=0;i<string_to_convert.length;i++){
-                    message.channel.send(print_letter(string_to_convert.charCodeAt(i)));
-                }
-            }
+		emojis_available = client.emojis.cache.map(e=>e.toString());
+		var tmp = emojis_available.indexOf(config.background_emoji);
+		if(tmp >=0){
+			emojis_available.splice(tmp,1);	
+		}
+		else{
+			message.channel.send(`${message.author} Background emoji is not set.`);
+			set_config("");
+		}
+
+		for(i=0;i<string_to_convert.length;i++){
+		    message.channel.send(print_letter(string_to_convert.charCodeAt(i)));
+		}
         }
     }
     else if (message.content.startsWith(config.prefix_config)){
@@ -92,7 +80,6 @@ client.on('message', message => {
             }
             else{
                 set_config(tmp.toString());
-                get_available_emojis();
                 message.channel.send(`${message.author} Successfully set the background emoji.`);
             }
         }
