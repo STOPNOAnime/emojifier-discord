@@ -54,15 +54,14 @@ client.on('message', message => {
 		emojis_available = client.emojis.cache.map(e=>e.toString());
 		var tmp = emojis_available.indexOf(config.background_emoji);
 		if(tmp >=0){
-			emojis_available.splice(tmp,1);	
+			emojis_available.splice(tmp,1);
+			for(i=0;i<string_to_convert.length;i++){
+		    		message.channel.send(print_letter(string_to_convert.charCodeAt(i)));
+			}
 		}
 		else{
 			message.channel.send(`${message.author} Background emoji is not set.`);
 			set_config("");
-		}
-
-		for(i=0;i<string_to_convert.length;i++){
-		    message.channel.send(print_letter(string_to_convert.charCodeAt(i)));
 		}
         }
     }
