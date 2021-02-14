@@ -1,6 +1,8 @@
 {
   "name": "emojifier-discord",
   "main": "index.js",
+  "repository": "github:STOPNOAnime:emojifier-discord",
+  "license": "MIT",
   "dependencies": {
     "discord.js": ">=12.5.1"
   }
