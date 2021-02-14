@@ -11,6 +11,7 @@ npm install
 sudo npm install -g pm2
 pm2 start index.js
 pm2 startup systemd
+pm2 save
 ```
 
 Remember to set the correct token.
