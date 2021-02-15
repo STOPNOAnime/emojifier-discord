@@ -48,7 +48,7 @@ client.on('message', message => {
         var ascii = /^[ -~\t\n\r]+$/;
 
         if(!ascii.test(string_to_convert) || string_to_convert.length > 10) {
-            message.channel.send(`${message.author} Provide a correct string (only basic ASCI characters and up to 10 characters).`);  
+            message.channel.send(`${message.author} Provide a correct string (only basic ASCI and up to 10 characters).`);  
         }
         else{
 		emojis_available = client.emojis.cache.map(e=>e.toString());
