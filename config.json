@@ -2,5 +2,6 @@
     "prefix_main": "!emojify",
     "prefix_config": "!emoji",
     "background_emoji": "",
+    "char_limit": "25",
     "token": ""
 }
